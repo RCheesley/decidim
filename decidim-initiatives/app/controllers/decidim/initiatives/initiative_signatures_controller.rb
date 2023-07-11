@@ -7,7 +7,6 @@
 # i18n-tasks-use t('layouts.decidim.initiative_signature_creation_header.finished')
 module Decidim
   module Initiatives
-    require "wicked"
     class InitiativeSignaturesController < Decidim::Initiatives::ApplicationController
       layout "layouts/decidim/redesigned_initiative_signature_creation"
       include Decidim::Initiatives::NeedsInitiative
