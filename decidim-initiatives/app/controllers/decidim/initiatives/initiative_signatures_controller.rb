@@ -73,7 +73,7 @@ module Decidim
           flash[:alert] = I18n.t("personal_data.invalid", scope: "decidim.initiatives.initiative_votes")
           @form = @vote_form
 
-          render :fill_personal_data && return
+          render :fill_personal_data
         end
         redirect_to sms_phone_number_path
       end
