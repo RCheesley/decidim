@@ -1,4 +1,4 @@
-name: "[CI] Admin (unit tests)"
+name: "[CI] Admin"
 on:
   push:
     branches:
@@ -27,10 +27,24 @@ jobs:
     name: Build test application
   main:
     strategy:
+      fail-fast: false
       matrix:
         test-command:
-          - bundle exec parallel_test --type rspec --pattern spec/ --exclude-pattern spec/system
+          - bundle exec parallel_test --type rspec --pattern spec/commands
+          - bundle exec parallel_test --type rspec --pattern spec/controllers
+          - bundle exec parallel_test --type rspec --pattern spec/events
+          - bundle exec parallel_test --type rspec --pattern spec/forms
+          - bundle exec parallel_test --type rspec --pattern spec/helpers
+          - bundle exec parallel_test --type rspec --pattern spec/jobs
+          - bundle exec parallel_test --type rspec --pattern spec/lib
+          - bundle exec parallel_test --type rspec --pattern spec/models
+          - bundle exec parallel_test --type rspec --pattern spec/permissions
+          - bundle exec parallel_test --type rspec --pattern spec/presenters
+          - bundle exec parallel_test --type rspec --pattern spec/queries
+          - bundle exec parallel_test --type rspec --pattern spec/shared
           - bundle exec parallel_test --type rspec --pattern spec/system
+          - bundle exec parallel_test --type rspec --pattern spec/views
+          - bundle exec parallel_test --type rspec --pattern spec/ --exclude-pattern 'spec/(commands|controllers|events|forms|helpers|jobs|lib|models|permissions|presenters|queries|shared|views|system)'
     needs: build_app
     name: Tests
     uses: ./.github/workflows/test_app.yml

@@ -93,8 +93,8 @@ jobs:
         name: Upload coverage
         with:
           token: ${{ inputs.codecov_token }}
-          name: ${{ inputs.working-directory }}-${{ github.sha }}-${{ inputs.test_command }}
-          flags: ${{ inputs.working-directory }}-${{ github.sha }}-${{ inputs.test_command }}
+          name: ${{ inputs.working-directory }}-${{ github.sha }}-${{ github.actor_id }}
+          flags: ${{ inputs.working-directory }}-${{ github.sha }}-${{ github.actor_id }}
       - uses: actions/upload-artifact@v3
         if: always()
         with:
