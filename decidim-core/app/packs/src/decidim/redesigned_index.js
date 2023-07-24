@@ -57,12 +57,10 @@ import "./gallery"
 import "./direct_uploads/redesigned_upload_field"
 import "./data_consent"
 import "./sw"
-import changeReportFormBehavior from "./redesigned_change_report_form_behavior"
-
 
 // local deps that require initialization
 import formDatePicker from "./form_datepicker"
-import fixDropdownMenus from "./dropdowns_menus"
+// import fixDropdownMenus from "./dropdowns_menus" -- deprecated
 import Configuration from "./configuration"
 import ExternalLink from "./redesigned_external_link"
 import updateExternalDomainLinks from "./external_domain_warning"
@@ -71,7 +69,7 @@ import InputCharacterCounter, { createCharacterCounter } from "./redesigned_inpu
 import FormValidator from "./form_validator"
 import FormFilterComponent from "./redesigned_form_filter"
 import addInputEmoji, { EmojiButton } from "./input_emoji"
-import dialogMode from "./dialog_mode"
+// import dialogMode from "./dialog_mode" -- deprecated
 import FocusGuard from "./focus_guard"
 import backToListLink from "./back_to_list"
 import markAsReadNotifications from "./notifications"
@@ -85,6 +83,7 @@ import {
   createDropdown,
   Dialogs
 } from "./redesigned_a11y"
+import changeReportFormBehavior from "./redesigned_change_report_form_behavior"
 
 // bad practice: window namespace should avoid be populated as much as possible
 // rails-translations could be referrenced through a single Decidim.I18n object
@@ -118,36 +117,10 @@ const initializer = (element = document) => {
 
   // REDESIGN_PENDING: deprecated
   $(element).foundation();
-  // REDESIGN_PENDING: deprecated - foundation events won't trigger
-  $(element).on("open.zf.reveal", (ev) => {
-    dialogMode($(ev.target));
-  });
-
-  // Trap the focus within the mobile menu if the user enters it. This is an
-  // accessibility feature forcing the focus within the offcanvas container
-  // which holds the mobile menu.
-  // REDESIGN_PENDING: deprecated - foundation events won't trigger
-  $("#offCanvas").on("openedEnd.zf.offCanvas", (ev) => {
-    ev.target.querySelector(".main-nav a").focus();
-    window.focusGuard.trap(ev.target);
-  }).on("closed.zf.offCanvas", () => {
-    window.focusGuard.disable();
-  });
-
-  // REDESIGN_PENDING: deprecated
-  fixDropdownMenus();
 
   svg4everybody();
 
-  // Prevent data-open buttons e.g. from submitting the underlying form in
-  // authorized action buttons.
-  // REDESIGN_PENDING: deprecated - foundation events won't trigger
-  // NOTE: in redesign, date-open attribute is valid for a11y-accordion-component, but the following context is deprecated
-  $("[data-open]").on("click", (event) => {
-    event.preventDefault();
-  });
-
-  formDatePicker();
+  formDatePicker(element);
 
   element.querySelectorAll(".editor-container").forEach((container) => window.createEditor(container));
 
