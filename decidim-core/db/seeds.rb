@@ -149,7 +149,7 @@ if !Rails.env.production? || ENV.fetch("SEED", nil)
     password_updated_at: Time.current,
     admin_terms_accepted_at: Time.current
   }
-  admin_hash.merge!(password: "decidim123456789", password_confirmation: "decidim123456789") if admin.encrypted_password.blank?
+  admin_hash.merge!(password: "decidim123456789") if admin.encrypted_password.blank?
   admin.update!(admin_hash)
 
   ["user@example.org", "user2@example.org"].each do |email|
@@ -157,7 +157,6 @@ if !Rails.env.production? || ENV.fetch("SEED", nil)
       name: Faker::Name.name,
       nickname: Faker::Twitter.unique.screen_name,
       password: "decidim123456789",
-      password_confirmation: "decidim123456789",
       confirmed_at: Time.current,
       locale: I18n.default_locale,
       organization:,
@@ -177,7 +176,6 @@ if !Rails.env.production? || ENV.fetch("SEED", nil)
     name: Faker::Name.name,
     nickname: Faker::Twitter.unique.screen_name,
     password: "decidim123456789",
-    password_confirmation: "decidim123456789",
     confirmed_at: Time.current,
     locale: I18n.default_locale,
     organization:,
