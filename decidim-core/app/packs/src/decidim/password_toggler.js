@@ -53,7 +53,7 @@ export default class PasswordToggler {
     this.statusText = statusText;
 
     const inputGroupWrapper = document.createElement("div");
-    inputGroupWrapper.classList.add("filter-search", "filter-container");
+    inputGroupWrapper.classList.add("input-group");
 
     const inputParent = this.input.parentNode;
     const inputGrandParent = inputParent.parentNode;

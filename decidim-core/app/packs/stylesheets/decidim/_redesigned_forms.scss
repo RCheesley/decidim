@@ -117,6 +117,18 @@
   }
 }
 
+.input-group {
+  @apply w-full relative;
+
+  input {
+    @apply w-full;
+  }
+
+  button {
+    @apply absolute right-2 inset-y-2;
+  }
+}
+
 .input-character-counter {
   @apply relative mt-4 block;
 
